@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMS Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'bg-primary':   '#1a1a1a',
+          'bg-secondary': '#222222',
+          'bg-card':      '#2a2a2a',
+          'bg-input':     '#1e1e1e',
+          'border-dark':  '#333333',
+          'cyan-hms':     '#00e5c8',
+          'pink-hms':     '#e8006f',
+          'yellow-hms':   '#f5c518',
+          'red-hms':      '#e53935',
+        },
+        fontFamily: {
+          outfit: ['Outfit', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+  input:focus { outline: none; border-color: #00e5c8 !important; }
+</style>
+</head>
+<body class="font-outfit bg-bg-primary text-white min-h-screen flex flex-col">
+
+<!-- ═══════════════════ TOP NAV ═══════════════════ -->
+<nav class="flex items-center px-6 h-16 bg-bg-secondary border-b border-border-dark gap-8 flex-shrink-0">
+  <!-- Logo -->
+  <div class="flex items-center gap-2 text-xl font-bold text-white mr-4">
+    <div class="w-3.5 h-3.5 bg-cyan-hms rounded-full"></div>
+    HMS
+  </div>
+  <!-- Nav Links -->
+  <div class="flex gap-1 flex-1">
+    <button class="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium text-cyan-hms bg-cyan-hms/10 border border-cyan-hms transition-all">
+      <i class="fas fa-th-large"></i> Dashboard
+    </button>
+    <button class="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-bg-card border border-transparent transition-all">
+      <i class="fas fa-door-open"></i> Rooms
+    </button>
+    <button class="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-bg-card border border-transparent transition-all">
+      <i class="fas fa-clipboard-list"></i> Attendance
+    </button>
+    <button class="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-bg-card border border-transparent transition-all">
+      <i class="fas fa-landmark"></i> Accounts
+    </button>
+    <button class="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-bg-card border border-transparent transition-all">
+      <i class="fas fa-tools"></i> Maintenance
+    </button>
+  </div>
+  <!-- Nav Icons -->
+  <div class="flex items-center gap-3 ml-auto">
+    <div class="w-10 h-10 bg-bg-card rounded-full flex items-center justify-center border border-border-dark text-gray-400 hover:text-white hover:border-cyan-hms cursor-pointer transition-all">
+      <i class="far fa-calendar-alt text-base"></i>
+    </div>
+    <div class="w-10 h-10 bg-bg-card rounded-full flex items-center justify-center border border-border-dark text-gray-400 hover:text-white hover:border-cyan-hms cursor-pointer transition-all">
+      <i class="far fa-bell text-base"></i>
+    </div>
+    <div class="w-10 h-10 bg-bg-card rounded-full flex items-center justify-center border border-border-dark text-gray-400 hover:text-white hover:border-cyan-hms cursor-pointer transition-all">
+      <i class="far fa-user text-base"></i>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════ LAYOUT ═══════════════════ -->
+<div class="flex flex-1 overflow-hidden">
+
+  <!-- ══════ SIDEBAR ══════ -->
+  <aside class="w-56 bg-bg-secondary border-r border-border-dark p-3 flex flex-col gap-1 flex-shrink-0">
+    <button class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-bg-card hover:text-white transition-all w-full text-left">
+      <i class="fas fa-chart-bar w-5 text-center"></i> Analytics
+    </button>
+    <button class="flex items-center gap-3 pl-[11px] py-2.5 rounded-xl text-sm font-medium text-white bg-bg-card border-l-[3px] border-cyan-hms w-full text-left">
+      <i class="fas fa-user-graduate w-5 text-center"></i> Students
+    </button>
+    <button class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-bg-card hover:text-white transition-all w-full text-left">
+      <i class="far fa-comment-dots w-5 text-center"></i> Complaints
+    </button>
+    <button class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-bg-card hover:text-white transition-all w-full text-left">
+      <i class="fas fa-boxes w-5 text-center"></i> Stock
+    </button>
+    <button class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-bg-card hover:text-white transition-all w-full text-left">
+      <i class="fas fa-users w-5 text-center"></i> Users
+    </button>
+    <button class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-bg-card hover:text-white transition-all w-full text-left">
+      <i class="fas fa-utensils w-5 text-center"></i> Meals
+    </button>
+  </aside>
+
+  <!-- ══════ MAIN ══════ -->
+  <main class="flex-1 overflow-y-auto p-6 flex flex-col gap-5">
+
+    <!-- ── STAT CARDS ── -->
+    <div class="grid grid-cols-4 gap-3 bg-bg-card rounded-2xl p-4 border border-border-dark">
+
+      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark">
+        <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium mb-1.5">
+          Total Students <i class="fas fa-external-link-alt text-[10px] opacity-60"></i>
+        </div>
+        <div class="text-3xl font-bold text-white">3569</div>
+      </div>
+
+      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark">
+        <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium mb-1.5">
+          In Hostel <i class="fas fa-external-link-alt text-[10px] opacity-60"></i>
+        </div>
+        <div class="text-3xl font-bold text-cyan-hms">1569</div>
+      </div>
+
+      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark">
+        <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium mb-1.5">
+          Outside Hostel <i class="fas fa-external-link-alt text-[10px] opacity-60"></i>
+        </div>
+        <div class="text-3xl font-bold text-white">2500</div>
+      </div>
+
+      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark flex flex-col justify-between">
+        <div>
+          <div class="text-xs text-gray-400 font-medium mb-1.5">Fees Defaulters</div>
+          <div class="text-3xl font-bold text-yellow-hms">150</div>
+        </div>
+        <button class="mt-2.5 px-5 py-2 bg-bg-card border border-border-dark rounded-lg text-white text-sm font-medium hover:bg-[#333] transition-all cursor-pointer">
+          View List
+        </button>
+      </div>
+
+      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark">
+        <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium mb-1.5">
+          Students Assigned <i class="fas fa-external-link-alt text-[10px] opacity-60"></i>
+        </div>
+        <div class="text-3xl font-bold text-pink-hms">2569</div>
+      </div>
+
+      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark">
+        <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium mb-1.5">
+          Students Removed <i class="fas fa-external-link-alt text-[10px] opacity-60"></i>
+        </div>
+        <div class="text-3xl font-bold text-red-400">1000</div>
+      </div>
+
+    </div>
+
+    <!-- ── CONTENT GRID ── -->
+    <div class="grid grid-cols-[1fr_1fr_280px] gap-4">
+
+      <!-- STUDENTS PANEL -->
+      <div class="bg-bg-card rounded-2xl border border-border-dark overflow-hidden">
+        <div class="px-4 py-3.5 text-[15px] font-semibold flex items-center justify-between border-b border-border-dark">
+          Students
+          <i class="fas fa-external-link-alt text-[11px] text-gray-500"></i>
+        </div>
+        <div class="flex items-center gap-2.5 px-4 py-3 border-b border-border-dark">
+          <div class="relative flex-1">
+            <i class="fas fa-search absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-500 text-xs pointer-events-none"></i>
+            <input type="text" placeholder="Search ..."
+              class="w-full bg-bg-input border border-border-dark rounded-lg pl-8 pr-3 py-2 text-white text-sm font-outfit placeholder-gray-500 transition-all">
+          </div>
+          <button class="flex items-center gap-1.5 px-3.5 py-2 bg-bg-input border border-border-dark rounded-lg text-gray-400 text-sm hover:text-white transition-all cursor-pointer">
+            <i class="fas fa-sliders-h"></i> Filter
+          </button>
+        </div>
+        <div id="student-list" class="overflow-y-auto max-h-[400px]"></div>
+      </div>
+
+      <!-- DEFAULTERS PANEL -->
+      <div class="bg-bg-card rounded-2xl border border-border-dark overflow-hidden">
+        <div class="px-4 py-3.5 text-[15px] font-semibold flex items-center justify-between border-b border-border-dark">
+          Defaulters Students
+          <i class="fas fa-external-link-alt text-[11px] text-gray-500"></i>
+        </div>
+        <div class="flex items-center gap-2.5 px-4 py-3 border-b border-border-dark">
+          <div class="relative flex-1">
+            <i class="fas fa-search absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-500 text-xs pointer-events-none"></i>
+            <input type="text" placeholder="Search ..."
+              class="w-full bg-bg-input border border-border-dark rounded-lg pl-8 pr-3 py-2 text-white text-sm font-outfit placeholder-gray-500 transition-all">
+          </div>
+          <button class="px-4 py-2 bg-cyan-hms rounded-lg text-black text-sm font-semibold hover:opacity-90 transition-all cursor-pointer">
+            +Add
+          </button>
+        </div>
+        <div id="defaulters-list" class="overflow-y-auto max-h-[400px]"></div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="flex flex-col gap-4">
+
+        <!-- Action Buttons -->
+        <button class="w-full py-3.5 px-5 bg-transparent border-2 border-cyan-hms rounded-xl text-cyan-hms text-[15px] font-semibold hover:bg-cyan-hms hover:text-black transition-all cursor-pointer text-center">
+          +Add Student
+        </button>
+        <button class="w-full py-3.5 px-5 bg-transparent border-2 border-red-hms rounded-xl text-red-hms text-[15px] font-semibold hover:bg-red-hms hover:text-white transition-all cursor-pointer text-center">
+          Remove Student
+        </button>
+
+        <!-- Student Updates -->
+        <div class="bg-bg-card rounded-2xl border border-border-dark overflow-hidden flex-1">
+          <div class="px-4 py-3.5 text-[15px] font-semibold flex items-center justify-between border-b border-border-dark">
+            Student Update
+            <i class="fas fa-external-link-alt text-[11px] text-gray-500"></i>
+          </div>
+          <div id="updates-list" class="p-2 flex flex-col gap-1.5 overflow-y-auto max-h-[360px]"></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
