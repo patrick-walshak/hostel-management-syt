@@ -1,224 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HMS Dashboard</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          'bg-primary':   '#1a1a1a',
-          'bg-secondary': '#222222',
-          'bg-card':      '#2a2a2a',
-          'bg-input':     '#1e1e1e',
-          'border-dark':  '#333333',
-          'cyan-hms':     '#00e5c8',
-          'pink-hms':     '#e8006f',
-          'yellow-hms':   '#f5c518',
-          'red-hms':      '#e53935',
-        },
-        fontFamily: {
-          outfit: ['Outfit', 'sans-serif'],
-        },
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HMS Dashboard</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              900: '#0f0f0f',
+              800: '#1a1a1a',
+              700: '#222222',
+              600: '#2a2a2a',
+              500: '#333333',
+            },
+            cyan: { DEFAULT: '#00e5cc' },
+            pink: { DEFAULT: '#ff3cac' },
+            red: { DEFAULT: '#ff4c4c' },
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] }
+        }
       }
     }
-  }
-</script>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
-  input:focus { outline: none; border-color: #00e5c8 !important; }
-</style>
+  </script>
+  <style>
+    body { background-color: #0f0f0f; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
 </head>
-<body class="font-outfit bg-bg-primary text-white min-h-screen flex flex-col">
+<body class="font-sans text-white min-h-screen bg-[#0f0f0f]">
 
-<!-- ═══════════════════ TOP NAV ═══════════════════ -->
-<nav class="flex items-center px-6 h-16 bg-bg-secondary border-b border-border-dark gap-8 flex-shrink-0">
-  <!-- Logo -->
-  <div class="flex items-center gap-2 text-xl font-bold text-white mr-4">
-    <div class="w-3.5 h-3.5 bg-cyan-hms rounded-full"></div>
-    HMS
-  </div>
-  <!-- Nav Links -->
-  <div class="flex gap-1 flex-1">
-    <button class="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium text-cyan-hms bg-cyan-hms/10 border border-cyan-hms transition-all">
-      <i class="fas fa-th-large"></i> Dashboard
-    </button>
-    <button class="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-bg-card border border-transparent transition-all">
-      <i class="fas fa-door-open"></i> Rooms
-    </button>
-    <button class="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-bg-card border border-transparent transition-all">
-      <i class="fas fa-clipboard-list"></i> Attendance
-    </button>
-    <button class="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-bg-card border border-transparent transition-all">
-      <i class="fas fa-landmark"></i> Accounts
-    </button>
-    <button class="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-bg-card border border-transparent transition-all">
-      <i class="fas fa-tools"></i> Maintenance
-    </button>
-  </div>
-  <!-- Nav Icons -->
-  <div class="flex items-center gap-3 ml-auto">
-    <div class="w-10 h-10 bg-bg-card rounded-full flex items-center justify-center border border-border-dark text-gray-400 hover:text-white hover:border-cyan-hms cursor-pointer transition-all">
-      <i class="far fa-calendar-alt text-base"></i>
-    </div>
-    <div class="w-10 h-10 bg-bg-card rounded-full flex items-center justify-center border border-border-dark text-gray-400 hover:text-white hover:border-cyan-hms cursor-pointer transition-all">
-      <i class="far fa-bell text-base"></i>
-    </div>
-    <div class="w-10 h-10 bg-bg-card rounded-full flex items-center justify-center border border-border-dark text-gray-400 hover:text-white hover:border-cyan-hms cursor-pointer transition-all">
-      <i class="far fa-user text-base"></i>
-    </div>
-  </div>
-</nav>
+  <!-- Layout -->
+  <div class="flex h-screen ">
 
-<!-- ═══════════════════ LAYOUT ═══════════════════ -->
-<div class="flex flex-1 overflow-hidden">
-
-  <!-- ══════ SIDEBAR ══════ -->
-  <aside class="w-56 bg-bg-secondary border-r border-border-dark p-3 flex flex-col gap-1 flex-shrink-0">
-    <button class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-bg-card hover:text-white transition-all w-full text-left">
-      <i class="fas fa-chart-bar w-5 text-center"></i> Analytics
-    </button>
-    <button class="flex items-center gap-3 pl-[11px] py-2.5 rounded-xl text-sm font-medium text-white bg-bg-card border-l-[3px] border-cyan-hms w-full text-left">
-      <i class="fas fa-user-graduate w-5 text-center"></i> Students
-    </button>
-    <button class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-bg-card hover:text-white transition-all w-full text-left">
-      <i class="far fa-comment-dots w-5 text-center"></i> Complaints
-    </button>
-    <button class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-bg-card hover:text-white transition-all w-full text-left">
-      <i class="fas fa-boxes w-5 text-center"></i> Stock
-    </button>
-    <button class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-bg-card hover:text-white transition-all w-full text-left">
-      <i class="fas fa-users w-5 text-center"></i> Users
-    </button>
-    <button class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-bg-card hover:text-white transition-all w-full text-left">
-      <i class="fas fa-utensils w-5 text-center"></i> Meals
-    </button>
-  </aside>
-
-  <!-- ══════ MAIN ══════ -->
-  <main class="flex-1 overflow-y-auto p-6 flex flex-col gap-5">
-
-    <!-- ── STAT CARDS ── -->
-    <div class="grid grid-cols-4 gap-3 bg-bg-card rounded-2xl p-4 border border-border-dark">
-
-      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark">
-        <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium mb-1.5">
-          Total Students <i class="fas fa-external-link-alt text-[10px] opacity-60"></i>
-        </div>
-        <div class="text-3xl font-bold text-white">3569</div>
+    <!-- Sidebar -->
+    <aside class="w-52 flex-shrink-0 bg-[#111111] border-r border-white/5 flex flex-col py-6 px-3 gap-1">
+      <!-- Logo -->
+      <div class="flex items-center gap-2 px-3 mb-6">
+        <div class="w-5 h-5 rounded-full bg-[#00e5cc]"></div>
+        <span class="text-white font-bold text-lg tracking-wide">HMS</span>
       </div>
+      <!-- Nav items -->
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        Analytics
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white bg-white/10 border border-white/10 text-sm font-medium">
+        <svg class="w-4 h-4 text-[#00e5cc]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        Students
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        Complaints
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        Stock
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        Users
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        Meals
+      </a>
+    </aside>
 
-      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark">
-        <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium mb-1.5">
-          In Hostel <i class="fas fa-external-link-alt text-[10px] opacity-60"></i>
-        </div>
-        <div class="text-3xl font-bold text-cyan-hms">1569</div>
-      </div>
+    <!-- Main content -->
+    <div class="flex-1 flex flex-col overflow-hidden">
 
-      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark">
-        <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium mb-1.5">
-          Outside Hostel <i class="fas fa-external-link-alt text-[10px] opacity-60"></i>
-        </div>
-        <div class="text-3xl font-bold text-white">2500</div>
-      </div>
-
-      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark flex flex-col justify-between">
-        <div>
-          <div class="text-xs text-gray-400 font-medium mb-1.5">Fees Defaulters</div>
-          <div class="text-3xl font-bold text-yellow-hms">150</div>
-        </div>
-        <button class="mt-2.5 px-5 py-2 bg-bg-card border border-border-dark rounded-lg text-white text-sm font-medium hover:bg-[#333] transition-all cursor-pointer">
-          View List
-        </button>
-      </div>
-
-      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark">
-        <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium mb-1.5">
-          Students Assigned <i class="fas fa-external-link-alt text-[10px] opacity-60"></i>
-        </div>
-        <div class="text-3xl font-bold text-pink-hms">2569</div>
-      </div>
-
-      <div class="p-3.5 bg-bg-secondary rounded-xl border border-border-dark">
-        <div class="flex items-center gap-1.5 text-xs text-gray-400 font-medium mb-1.5">
-          Students Removed <i class="fas fa-external-link-alt text-[10px] opacity-60"></i>
-        </div>
-        <div class="text-3xl font-bold text-red-400">1000</div>
-      </div>
-
-    </div>
-
-    <!-- ── CONTENT GRID ── -->
-    <div class="grid grid-cols-[1fr_1fr_280px] gap-4">
-
-      <!-- STUDENTS PANEL -->
-      <div class="bg-bg-card rounded-2xl border border-border-dark overflow-hidden">
-        <div class="px-4 py-3.5 text-[15px] font-semibold flex items-center justify-between border-b border-border-dark">
-          Students
-          <i class="fas fa-external-link-alt text-[11px] text-gray-500"></i>
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-3 border-b border-border-dark">
-          <div class="relative flex-1">
-            <i class="fas fa-search absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-500 text-xs pointer-events-none"></i>
-            <input type="text" placeholder="Search ..."
-              class="w-full bg-bg-input border border-border-dark rounded-lg pl-8 pr-3 py-2 text-white text-sm font-outfit placeholder-gray-500 transition-all">
-          </div>
-          <button class="flex items-center gap-1.5 px-3.5 py-2 bg-bg-input border border-border-dark rounded-lg text-gray-400 text-sm hover:text-white transition-all cursor-pointer">
-            <i class="fas fa-sliders-h"></i> Filter
+      <!-- Top Nav -->
+      <header class="bg-[#111111] border-b border-white/5 flex items-center justify-between px-6 py-3 flex-shrink-0">
+        <nav class="flex items-center gap-1">
+          <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1a1a1a] border border-[#00e5cc]/40 text-white text-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+            Dashboard
+          </a>
+          <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Rooms
+          </a>
+          <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            Attendance
+          </a>
+          <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+            Accounts
+          </a>
+          <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Maintenance
+          </a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button class="p-2 rounded-lg bg-[#1a1a1a] hover:bg-[#222] transition-all">
+            <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </button>
+          <button class="p-2 rounded-lg bg-[#1a1a1a] hover:bg-[#222] transition-all relative">
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full"></span>
+          </button>
+          <button class="p-2 rounded-lg bg-[#1a1a1a] hover:bg-[#222] transition-all">
+            <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
           </button>
         </div>
-        <div id="student-list" class="overflow-y-auto max-h-[400px]"></div>
-      </div>
+      </header>
 
-      <!-- DEFAULTERS PANEL -->
-      <div class="bg-bg-card rounded-2xl border border-border-dark overflow-hidden">
-        <div class="px-4 py-3.5 text-[15px] font-semibold flex items-center justify-between border-b border-border-dark">
-          Defaulters Students
-          <i class="fas fa-external-link-alt text-[11px] text-gray-500"></i>
-        </div>
-        <div class="flex items-center gap-2.5 px-4 py-3 border-b border-border-dark">
-          <div class="relative flex-1">
-            <i class="fas fa-search absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-500 text-xs pointer-events-none"></i>
-            <input type="text" placeholder="Search ..."
-              class="w-full bg-bg-input border border-border-dark rounded-lg pl-8 pr-3 py-2 text-white text-sm font-outfit placeholder-gray-500 transition-all">
+      <!-- Content area -->
+      <main class="flex-1 overflow-auto p-5 bg-[#0f0f0f]">
+
+        <!-- Stats + Action buttons row -->
+        <div class="flex gap-4 mb-5">
+          <!-- Stats cards -->
+          <div class="flex-1 bg-[#1a1a1a] rounded-xl p-5 border border-white/5">
+            <div class="grid grid-cols-3 gap-4 mb-4">
+              <div>
+                <p class="text-xs text-gray-400 flex items-center gap-1 mb-1">Total Students <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></p>
+                <p class="text-2xl font-bold text-white">3569</p>
+              </div>
+              <div>
+                <p class="text-xs text-gray-400 flex items-center gap-1 mb-1">In Hostel <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></p>
+                <p class="text-2xl font-bold text-[#00e5cc]">1569</p>
+              </div>
+              <div>
+                <p class="text-xs text-gray-400 flex items-center gap-1 mb-1">Outside Hostel <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></p>
+                <p class="text-2xl font-bold text-white">2500</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+              <div>
+                <p class="text-xs text-gray-400 flex items-center gap-1 mb-1">Students Assigned <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></p>
+                <p class="text-2xl font-bold text-[#d946ef]">2569</p>
+              </div>
+              <div>
+                <p class="text-xs text-gray-400 flex items-center gap-1 mb-1">Students Removed <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></p>
+                <p class="text-2xl font-bold text-red-500">1000</p>
+              </div>
+            </div>
           </div>
-          <button class="px-4 py-2 bg-cyan-hms rounded-lg text-black text-sm font-semibold hover:opacity-90 transition-all cursor-pointer">
-            +Add
-          </button>
-        </div>
-        <div id="defaulters-list" class="overflow-y-auto max-h-[400px]"></div>
-      </div>
-
-      <!-- RIGHT COLUMN -->
-      <div class="flex flex-col gap-4">
-
-        <!-- Action Buttons -->
-        <button class="w-full py-3.5 px-5 bg-transparent border-2 border-cyan-hms rounded-xl text-cyan-hms text-[15px] font-semibold hover:bg-cyan-hms hover:text-black transition-all cursor-pointer text-center">
-          +Add Student
-        </button>
-        <button class="w-full py-3.5 px-5 bg-transparent border-2 border-red-hms rounded-xl text-red-hms text-[15px] font-semibold hover:bg-red-hms hover:text-white transition-all cursor-pointer text-center">
-          Remove Student
-        </button>
-
-        <!-- Student Updates -->
-        <div class="bg-bg-card rounded-2xl border border-border-dark overflow-hidden flex-1">
-          <div class="px-4 py-3.5 text-[15px] font-semibold flex items-center justify-between border-b border-border-dark">
-            Student Update
-            <i class="fas fa-external-link-alt text-[11px] text-gray-500"></i>
+          <!-- Fees defaulters card -->
+          <div class="bg-[#1a1a1a] rounded-xl p-5 border border-white/5 flex flex-col items-start justify-between w-44">
+            <p class="text-xs text-gray-400 mb-1">Fees Defaulters</p>
+            <p class="text-3xl font-bold text-yellow-400">150</p>
+            <button class="mt-4 w-full bg-[#2a2a2a] hover:bg-[#333] text-white text-xs font-medium py-2 px-3 rounded-lg transition-all">View List</button>
           </div>
-          <div id="updates-list" class="p-2 flex flex-col gap-1.5 overflow-y-auto max-h-[360px]"></div>
+          <!-- Action buttons -->
+          <div class="flex flex-col gap-3">
+            <button class="px-8 py-3 rounded-xl border-2 border-[#00e5cc] text-[#00e5cc] font-semibold text-sm hover:bg-[#00e5cc]/10 transition-all whitespace-nowrap">+Add Student</button>
+            <button class="px-8 py-3 rounded-xl border-2 border-red-500 text-red-500 font-semibold text-sm hover:bg-red-500/10 transition-all whitespace-nowrap">Remove Student</button>
+          </div>
         </div>
 
-      </div>
+        <!-- 3-column panels -->
+        <div class="grid grid-cols-3 gap-4 h-[calc(100vh-280px)]">
+
+          <!-- Students List -->
+          <div class="bg-[#1a1a1a] rounded-xl border border-white/5 flex flex-col overflow-hidden">
+            <div class="p-4 flex items-center justify-between flex-shrink-0">
+              <span class="text-sm font-semibold text-white flex items-center gap-1">Students <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>
+            </div>
+            <div class="px-4 pb-3 flex gap-2 flex-shrink-0">
+              <div class="flex-1 flex items-center gap-2 bg-[#111] rounded-lg px-3 py-2 border border-[#00e5cc]/60">
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" placeholder="Search ..." class="bg-transparent text-sm text-white placeholder-gray-500 outline-none flex-1"/>
+              </div>
+              <button class="flex items-center gap-1.5 bg-[#111] hover:bg-[#222] text-gray-300 text-xs px-3 py-2 rounded-lg border border-white/10 transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+                Filter
+              </button>
+            </div>
+            <div class="flex-1 overflow-y-auto scrollbar-hide px-4 pb-4 flex flex-col gap-1.5">
+              <!-- Student rows -->
+              <div class="flex items-center justify-between bg-[#222] hover:bg-[#2a2a2a] rounded-lg px-3 py-2.5 cursor-pointer transition-all">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex-shrink-0 overflow-hidden"><img src="https://i.pravatar.cc/28?img=1" class="w-full h-full object-cover" alt=""/></div>
+                  <span class="text-sm text-white">Abhinav Srivastva</span>
+                </div>
+                <button class="text-gray-500 hover:text-white transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+              </div>
+              <div class="flex items-center justify-between bg-[#222] hover:bg-[#2a2a2a] rounded-lg px-3 py-2.5 cursor-pointer transition-all">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/28?img=2" class="w-full h-full object-cover" alt=""/></div>
+                  <span class="text-sm text-white">Abhinav Srivastva</span>
+                </div>
+                <button class="text-gray-500 hover:text-white transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+              </div>
+              <div class="flex items-center justify-between bg-[#222] hover:bg-[#2a2a2a] rounded-lg px-3 py-2.5 cursor-pointer transition-all">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/28?img=3" class="w-full h-full object-cover" alt=""/></div>
+                  <span class="text-sm text-white">Abhinav Srivastva</span>
+                </div>
+                <button class="text-gray-500 hover:text-white transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+              </div>
+              <div class="flex items-center justify-between bg-[#222] hover:bg-[#2a2a2a] rounded-lg px-3 py-2.5 cursor-pointer transition-all">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/28?img=4" class="w-full h-full object-cover" alt=""/></div>
+                  <span class="text-sm text-white">Abhinav Srivastva</span>
+                </div>
+                <button class="text-gray-500 hover:text-white transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+              </div>
+              <div class="flex items-center justify-between bg-[#222] hover:bg-[#2a2a2a] rounded-lg px-3 py-2.5 cursor-pointer transition-all">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/28?img=5" class="w-full h-full object-cover" alt=""/></div>
+                  <span class="text-sm text-white">Abhinav Srivastva</span>
+                </div>
+                <button class="text-gray-500 hover:text-white transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+              </div>
+              <div class="flex items-center justify-between bg-[#222] hover:bg-[#2a2a2a] rounded-lg px-3 py-2.5 cursor-pointer transition-all">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/28?img=6" class="w-full h-full object-cover" alt=""/></div>
+                  <span class="text-sm text-white">Abhinav Srivastva</span>
+                </div>
+                <button class="text-gray-500 hover:text-white transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+              </div>
+              <div class="flex items-center justify-between bg-[#222] hover:bg-[#2a2a2a] rounded-lg px-3 py-2.5 cursor-pointer transition-all">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/28?img=7" class="w-full h-full object-cover" alt=""/></div>
+                  <span class="text-sm text-white">Abhinav Srivastva</span>
+                </div>
+                <button class="text-gray-500 hover:text-white transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+              </div>
+              <div class="flex items-center justify-between bg-[#222] hover:bg-[#2a2a2a] rounded-lg px-3 py-2.5 cursor-pointer transition-all">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/28?img=8" class="w-full h-full object-cover" alt=""/></div>
+                  <span class="text-sm text-white">Abhinav Srivastva</span>
+                </div>
+                <button class="text-gray-500 hover:text-white transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Defaulters Students -->
+          <div class="bg-[#1a1a1a] rounded-xl border border-white/5 flex flex-col overflow-hidden">
+            <div class="p-4 flex items-center justify-between flex-shrink-0">
+              <span class="text-sm font-semibold text-white flex items-center gap-1">Defaulters Students <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>
+            </div>
+            <div class="px-4 pb-3 flex gap-2 flex-shrink-0">
+              <div class="flex-1 flex items-center gap-2 bg-[#111] rounded-lg px-3 py-2 border border-white/10">
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" placeholder="Search ..." class="bg-transparent text-sm text-white placeholder-gray-500 outline-none flex-1"/>
+              </div>
+              <button class="flex items-center gap-1.5 bg-[#00e5cc] hover:bg-[#00c8b1] text-black text-xs font-bold px-3 py-2 rounded-lg transition-all">+Add</button>
+            </div>
+            <div class="flex-1 overflow-y-auto scrollbar-hide px-4 pb-4 flex flex-col gap-3">
+              <!-- Defaulter card 1 -->
+              <div class="bg-[#222] rounded-xl p-3 border border-white/5">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/28?img=10" class="w-full h-full object-cover" alt=""/></div>
+                    <span class="text-sm text-white">Abhinav Srivastva</span>
+                  </div>
+                  <button class="text-gray-500 hover:text-white transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                </div>
+                <p class="text-xs text-gray-400 mb-2.5">Broke 4 Test Tubes in Hostel Mess</p>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-xs bg-[#2a2a2a] text-gray-300 px-2.5 py-1 rounded-lg">Fine : ₹ 1,500</span>
+                  <span class="flex items-center gap-1 text-xs bg-[#2a2a2a] text-gray-300 px-2.5 py-1 rounded-lg">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    12 Nov 2022
+                  </span>
+                </div>
+                <div class="flex gap-2">
+                  <button class="flex-1 text-xs font-medium text-red-500 border border-red-500 hover:bg-red-500/10 rounded-lg py-1.5 transition-all">Remove Defaulter</button>
+                  <button class="flex-1 text-xs font-medium text-[#00e5cc] border border-[#00e5cc] hover:bg-[#00e5cc]/10 rounded-lg py-1.5 transition-all">Send Payment Link</button>
+                </div>
+              </div>
+              <!-- Defaulter card 2 -->
+              <div class="bg-[#222] rounded-xl p-3 border border-white/5">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/28?img=11" class="w-full h-full object-cover" alt=""/></div>
+                    <span class="text-sm text-white">Abhinav Srivastva</span>
+                  </div>
+                  <button class="text-gray-500 hover:text-white transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                </div>
+                <p class="text-xs text-gray-400 mb-2.5">Broke 4 Test Tubes in Hostel Mess</p>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-xs bg-[#2a2a2a] text-gray-300 px-2.5 py-1 rounded-lg">Fine : ₹ 1,500</span>
+                  <span class="flex items-center gap-1 text-xs bg-[#2a2a2a] text-gray-300 px-2.5 py-1 rounded-lg">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    12 Nov 2022
+                  </span>
+                </div>
+                <div class="flex gap-2">
+                  <button class="flex-1 text-xs font-medium text-red-500 border border-red-500 hover:bg-red-500/10 rounded-lg py-1.5 transition-all">Remove Defaulter</button>
+                  <button class="flex-1 text-xs font-medium text-[#00e5cc] border border-[#00e5cc] hover:bg-[#00e5cc]/10 rounded-lg py-1.5 transition-all">Send Payment Link</button>
+                </div>
+              </div>
+              <!-- Defaulter card 3 (partial) -->
+              <div class="bg-[#222] rounded-xl p-3 border border-white/5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/28?img=12" class="w-full h-full object-cover" alt=""/></div>
+                    <span class="text-sm text-white">Abhinav Srivastva</span>
+                  </div>
+                  <button class="text-gray-500 hover:text-white transition-all"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Student Update -->
+          <div class="bg-[#1a1a1a] rounded-xl border border-white/5 flex flex-col overflow-hidden">
+            <div class="p-4 flex-shrink-0">
+              <span class="text-sm font-semibold text-white flex items-center gap-1">Student Update <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></span>
+            </div>
+            <div class="flex-1 overflow-y-auto scrollbar-hide px-4 pb-4 flex flex-col gap-2">
+              <!-- Update rows -->
+              <div class="flex items-center gap-3 bg-[#222] hover:bg-[#2a2a2a] rounded-xl px-3 py-2.5 cursor-pointer transition-all">
+                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=20" class="w-full h-full object-cover" alt=""/></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-white font-medium">Ramakant Sharma</p>
+                  <p class="text-xs text-gray-500 flex items-center gap-1"><span>⬆</span> 12:30</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 bg-[#222] hover:bg-[#2a2a2a] rounded-xl px-3 py-2.5 cursor-pointer transition-all">
+                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=21" class="w-full h-full object-cover" alt=""/></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-white font-medium">Ramakant Sharma</p>
+                  <p class="text-xs text-gray-500 flex items-center gap-1"><span>⬇</span> 12:30</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 bg-[#222] hover:bg-[#2a2a2a] rounded-xl px-3 py-2.5 cursor-pointer transition-all">
+                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=22" class="w-full h-full object-cover" alt=""/></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-white font-medium">Ramakant Sharma</p>
+                  <p class="text-xs text-gray-500 flex items-center gap-1"><span>⬆</span> 12:30</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 bg-[#222] hover:bg-[#2a2a2a] rounded-xl px-3 py-2.5 cursor-pointer transition-all">
+                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=23" class="w-full h-full object-cover" alt=""/></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-white font-medium">Ramakant Sharma</p>
+                  <p class="text-xs text-gray-500 flex items-center gap-1"><span>⬇</span> 12:30</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 bg-[#222] hover:bg-[#2a2a2a] rounded-xl px-3 py-2.5 cursor-pointer transition-all">
+                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=24" class="w-full h-full object-cover" alt=""/></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-white font-medium">Ramakant Sharma</p>
+                  <p class="text-xs text-gray-500 flex items-center gap-1"><span>⬆</span> 12:30</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 bg-[#222] hover:bg-[#2a2a2a] rounded-xl px-3 py-2.5 cursor-pointer transition-all">
+                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=25" class="w-full h-full object-cover" alt=""/></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-white font-medium">Ramakant Sharma</p>
+                  <p class="text-xs text-gray-500 flex items-center gap-1"><span>⬇</span> 12:30</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 bg-[#222] hover:bg-[#2a2a2a] rounded-xl px-3 py-2.5 cursor-pointer transition-all">
+                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=26" class="w-full h-full object-cover" alt=""/></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-white font-medium">Ramakant Sharma</p>
+                  <p class="text-xs text-gray-500 flex items-center gap-1"><span>⬆</span> 12:30</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 bg-[#222] hover:bg-[#2a2a2a] rounded-xl px-3 py-2.5 cursor-pointer transition-all">
+                <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=27" class="w-full h-full object-cover" alt=""/></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-white font-medium">Ramakant Sharma</p>
+                  <p class="text-xs text-gray-500 flex items-center gap-1"><span>⬇</span> 12:30</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
     </div>
-  </main>
-</div>
+  </div>
+
 </body>
 </html>
+
