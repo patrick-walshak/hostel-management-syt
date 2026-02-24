@@ -1,11 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Dashboard Grid</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-<body>
-    
+
+<body class="bg-[#111] text-white">
+
+  <!-- Main Layout -->
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-[#1a1a1a]">
+        <div class="ml-5">
+            <div class="mt-24 flex items-center gap-2 text-2xl">               
+                <i class='bx bx-bar-chart' style='color:#21d6d6'  ></i>
+                <p>Analytices</p>
+            </div>
+            <div class="mt-8 flex items-center gap-2 text-2xl text-gray-400 font-medium">
+                <i class='bx bx-user' style='color:#98a4a4'  ></i>
+                <p>Student</p>
+            </div>
+            <div class="mt-9 flex items-center gap-2 text-2xl text-gray-400 font-medium">
+                <i class='bx bx-angry' style='color:#9aa2a2'  ></i>
+                <p>Complaints</p>
+            </div>
+            <div class="flex mt-8 items-center gap-2 text-2xl text-gray-400 font-medium">
+                <i class='bx bxs-component'></i>
+                <p>Stock</p>
+            </div>
+            <div class="flex mt-8 items-center gap-2 text-2xl text-gray-400 font-medium">
+                <i class='bx bx-user'></i>
+                <p>Users</p>
+            </div>
+            <div class="flex mt-8 items-center gap-2 text-2xl text-gray-400 font-medium">
+                <i class='bx bxs-bowl-rice'></i>
+                <p>Meals</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Right Content -->
+    <div class="flex-1 flex flex-col">
+
+      <!-- Top Navbar -->
+      <header class="h-16 bg-[#1a1a1a] border-b border-gray-800">
+        <div class="flex items-center justify-between mt-2">
+            <div>
+                <img src="src/img/Group 1.png" alt="">
+            </div>   
+            <div class="flex gap-14">
+                <div>
+                    <i class='bx bxs-dashboard' style='color:#20cea7'  ></i>
+                    <a href="">Dashboard</a>
+                </div>
+                <div>
+                    <i class='bx bx-copy' style='color:#656f6f'  ></i>
+                    <a href="">Room</a>
+                </div>
+                <div>
+                    <i class='bx bx-user-minus'></i>
+                    <a href="">Attendance</a>
+                </div>
+                <div>
+                    <i class='bx bxs-bank' style='color:#656f6f' ></i>
+                    <a href="">Account</a>
+                </div>
+                <div>
+                    <i class='bx bx-spray-can' style='color:#656f6f' ></i>
+                    <a href="">Maintainance</a>
+                </div>
+            </div>  
+            <div class="flex gap-5">
+                <img class="w-10 " src="src/img/calendar.png" alt="">
+                <img class="w-10 " src="src/img/notification.png" alt="">
+                <img class="w-10 " src="src/img/profile.png" alt="">
+            </div>               
+        </div>
+      </header>
+
+      <!-- Main Dashboard Area -->
+      <main class="flex-1 p-6">
+
+        <div class="grid grid-cols-12 gap-6">
+
+          <!-- LEFT SECTION -->
+          <div class="col-span-9 space-y-7">
+
+            <!-- Occupancy (3 boxes) -->
+            <div class="grid grid-cols-3 gap-6">
+              <div class="h-72 bg-[#1a1a1a] rounded-xl">
+                <p class="text-lg font-bold ml-3 mt-2">Hostel1</p>
+                <div class="flex justify-center items-center">
+                    <img class="w-[200px]" src="src/img/Screenshot_from_2026-02-24_13-49-12-removebg-preview.png" alt="">
+                </div>
+              </div>
+            <div class="h-72 bg-[#1a1a1a] rounded-xl">
+                <p class="text-lg font-bold ml-3 mt-2">Hostel2</p>
+                <div class="flex justify-center items-center">
+                    <img class="w-[200px]" src="src/img/image-removebg-preview.png" alt="">
+                </div>
+            </div>
+              <div class="h-72 bg-[#1a1a1a] rounded-xl">
+                <p class="text-lg font-bold ml-3 mt-2">Hostel3</p>
+                <div class="flex justify-center items-center">
+                    <img class="w-[200px]" src="src/img/image-removebg-preview (1).png" alt="">
+                </div>
+              </div>
+            </div>
+
+            <!-- Fees Collection -->
+            <div class="h-72 bg-[#1a1a1a] rounded-xl">
+                <div class="ml-40">
+                    <img class="w-[1100px]" src="src/img/image-removebg-preview (2).png" alt="">
+                </div>
+            </div>
+
+            <!-- Complaints -->
+            <div class="h-52 bg-[#1a1a1a] rounded-xl">
+                <div class="mt-10 ml-10">
+                    <img class="w-[1200px] p-10" src="src/img/image-removebg-preview (3).png" alt="">
+                </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT SECTION -->
+          <div class="col-span-3 space-y-6">
+
+            <!-- Student Updates -->
+            <div class="h-[600px] bg-[#1a1a1a] rounded-xl">
+                <div class=""> 
+                    <img class="w-[370px]" src="src/img/Frame 1.png" alt="">
+                </div>
+            </div>
+
+            <!-- Emergency Box -->
+            <div class="h-64 bg-[#1a1a1a] rounded-xl">
+                <div>
+                    <img class="ml-36" src="src/img/image-removebg-preview (4).png" alt="">
+                </div>
+                <div class="flex justify-center text-center mt-2">
+                    <p>Press only in case of<br> Emergency</p>
+                </div>
+                <div class="w-52 h-10 bg-[#ff0808] rounded-lg font-bold flex justify-center items-center mx-auto mt-2">
+                    <button>Emergency</button>
+                </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
 </body>
 </html>
