@@ -1,164 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard Grid</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HMS Analytics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } }
+    }
+  </script>
+  <style>
+    body { background-color: #0f0f0f; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
 </head>
+<body class="font-sans text-white min-h-screen bg-[#0f0f0f]">
 
-<body class="bg-[#111] text-white">
+<div class="flex h-screen overflow-hidden">
 
-  <!-- Main Layout -->
-  <div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="w-48 flex-shrink-0 bg-[#111111] border-r border-white/5 flex flex-col py-6 px-3 gap-1">
+    <div class="flex items-center gap-2 px-3 mb-6">
+      <div class="w-4 h-4 rounded-full bg-[#00e5cc]"></div>
+      <span class="text-white font-bold text-lg tracking-wide">HMS</span>
+    </div>
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white bg-white/10 border border-white/10 text-sm font-medium">
+      <svg class="w-4 h-4 text-[#00e5cc]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      Analytics
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      Students
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+      Complaints
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+      Stock
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      Users
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+      Meals
+    </a>
+  </aside>
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-[#1a1a1a]">
-        <div class="ml-5">
-            <div class="mt-24 flex items-center gap-2 text-2xl">               
-                <i class='bx bx-bar-chart' style='color:#21d6d6'  ></i>
-                <p>Analytices</p>
-            </div>
-            <div class="mt-8 flex items-center gap-2 text-2xl text-gray-400 font-medium">
-                <i class='bx bx-user' style='color:#98a4a4'  ></i>
-                <p>Student</p>
-            </div>
-            <div class="mt-9 flex items-center gap-2 text-2xl text-gray-400 font-medium">
-                <i class='bx bx-angry' style='color:#9aa2a2'  ></i>
-                <p>Complaints</p>
-            </div>
-            <div class="flex mt-8 items-center gap-2 text-2xl text-gray-400 font-medium">
-                <i class='bx bxs-component'></i>
-                <p>Stock</p>
-            </div>
-            <div class="flex mt-8 items-center gap-2 text-2xl text-gray-400 font-medium">
-                <i class='bx bx-user'></i>
-                <p>Users</p>
-            </div>
-            <div class="flex mt-8 items-center gap-2 text-2xl text-gray-400 font-medium">
-                <i class='bx bxs-bowl-rice'></i>
-                <p>Meals</p>
-            </div>
-        </div>
-    </aside>
+  <!-- Main -->
+  <div class="flex-1 flex flex-col overflow-hidden">
 
-    <!-- Right Content -->
-    <div class="flex-1 flex flex-col">
+    <!-- Top Nav -->
+    <header class="bg-[#111111] border-b border-white/5 flex items-center justify-between px-5 py-3 flex-shrink-0">
+      <nav class="flex items-center gap-1">
+        <a href="dash-student.html" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1a1a1a] border border-[#00e5cc]/40 text-white text-sm font-medium">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Dashboard
+        </a>
+        <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          Rooms
+        </a>
+        <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          Attendance
+        </a>
+        <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+          Accounts
+        </a>
+        <a href="#" class="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 text-sm transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Maintenance
+        </a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button class="p-2 rounded-lg bg-[#1a1a1a] hover:bg-[#222] transition-all">
+          <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </button>
+        <button class="p-2 rounded-lg bg-[#1a1a1a] hover:bg-[#222] transition-all relative">
+          <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          <span class="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-yellow-400 rounded-full"></span>
+        </button>
+        <button class="p-2 rounded-lg bg-[#1a1a1a] hover:bg-[#222] transition-all">
+          <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        </button>
+      </div>
+    </header>
 
-      <!-- Top Navbar -->
-      <header class="h-16 bg-[#1a1a1a] border-b border-gray-800">
-        <div class="flex items-center justify-between mt-2">
-            <div>
-                <img src="src/img/Group 1.png" alt="">
-            </div>   
-            <div class="flex gap-14">
-                <div>
-                    <i class='bx bxs-dashboard' style='color:#20cea7'  ></i>
-                    <a href="dash-student.html">Dashboard</a>
-                </div>
-                <div>
-                    <i class='bx bx-copy' style='color:#656f6f'  ></i>
-                    <a href="">Room</a>
-                </div>
-                <div>
-                    <i class='bx bx-user-minus'></i>
-                    <a href="">Attendance</a>
-                </div>
-                <div>
-                    <i class='bx bxs-bank' style='color:#656f6f' ></i>
-                    <a href="">Account</a>
-                </div>
-                <div>
-                    <i class='bx bx-spray-can' style='color:#656f6f' ></i>
-                    <a href="">Maintainance</a>
-                </div>
-            </div>  
-            <div class="flex gap-5">
-                <img class="w-10 " src="src/img/calendar.png" alt="">
-                <img class="w-10 " src="src/img/notification.png" alt="">
-                <img class="w-10 " src="src/img/profile.png" alt="">
-            </div>               
-        </div>
-      </header>
+    <!-- Content area -->
+    <div class="flex-1 flex overflow-hidden">
 
-      <!-- Main Dashboard Area -->
-      <main class="flex-1 p-6">
+      <!-- Center content -->
+      <main class="flex-1 overflow-y-auto scrollbar-hide bg-[#0f0f0f] p-4 flex flex-col gap-4">
 
-        <div class="grid grid-cols-12 gap-6">
+        <!-- Occupancy Section -->
+        <div class="bg-[#1a1a1a] rounded-2xl border border-white/5 p-4">
+          <p class="text-sm font-semibold text-white flex items-center gap-1 mb-4">
+            Occupancy
+            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </p>
+          <div class="grid grid-cols-3 gap-3">
 
-          <!-- LEFT SECTION -->
-          <div class="col-span-9 space-y-7">
-
-            <!-- Occupancy (3 boxes) -->
-            <div class="grid grid-cols-3 gap-6">
-              <div class="h-72 bg-[#1a1a1a] rounded-xl">
-                <p class="text-lg font-bold ml-3 mt-2">Hostel1</p>
-                <div class="flex justify-center items-center">
-                    <img class="w-[200px]" src="src/img/Screenshot_from_2026-02-24_13-49-12-removebg-preview.png" alt="">
+            <!-- Hostel 1 — Cyan 50% -->
+            <div class="bg-[#111] rounded-xl border border-white/5 p-4 flex flex-col items-start gap-2">
+              <p class="text-xs font-medium text-white flex items-center gap-1">
+                Hostel 1
+                <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </p>
+              <div class="w-full flex justify-center py-2">
+                <div class="relative w-28 h-28">
+                  <svg viewBox="0 0 100 100" class="w-28 h-28 -rotate-90">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#1e1e1e" stroke-width="13"/>
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#00e5cc" stroke-width="13"
+                      stroke-dasharray="251.3" stroke-dashoffset="125.65" stroke-linecap="round"/>
+                  </svg>
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <span class="text-lg font-bold text-white">50%</span>
+                  </div>
                 </div>
               </div>
-            <div class="h-72 bg-[#1a1a1a] rounded-xl">
-                <p class="text-lg font-bold ml-3 mt-2">Hostel2</p>
-                <div class="flex justify-center items-center">
-                    <img class="w-[200px]" src="src/img/image-removebg-preview.png" alt="">
-                </div>
             </div>
-              <div class="h-72 bg-[#1a1a1a] rounded-xl">
-                <p class="text-lg font-bold ml-3 mt-2">Hostel3</p>
-                <div class="flex justify-center items-center">
-                    <img class="w-[200px]" src="src/img/image-removebg-preview (1).png" alt="">
+
+            <!-- Hostel 2 — Yellow 75% -->
+            <div class="bg-[#111] rounded-xl border border-white/5 p-4 flex flex-col items-start gap-2">
+              <p class="text-xs font-medium text-white flex items-center gap-1">
+                Hostel 2
+                <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </p>
+              <div class="w-full flex justify-center py-2">
+                <div class="relative w-28 h-28">
+                  <svg viewBox="0 0 100 100" class="w-28 h-28 -rotate-90">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#1e1e1e" stroke-width="13"/>
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#facc15" stroke-width="13"
+                      stroke-dasharray="251.3" stroke-dashoffset="62.83" stroke-linecap="round"/>
+                  </svg>
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <span class="text-lg font-bold text-white">75%</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Fees Collection -->
-            <div class="h-72 bg-[#1a1a1a] rounded-xl">
-                <div class="ml-40">
-                    <img class="w-[1100px]" src="src/img/image-removebg-preview (2).png" alt="">
+            <!-- Hostel 3 — Pink 95% -->
+            <div class="bg-[#111] rounded-xl border border-white/5 p-4 flex flex-col items-start gap-2">
+              <p class="text-xs font-medium text-white flex items-center gap-1">
+                Hostel 3
+                <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </p>
+              <div class="w-full flex justify-center py-2">
+                <div class="relative w-28 h-28">
+                  <svg viewBox="0 0 100 100" class="w-28 h-28 -rotate-90">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#1e1e1e" stroke-width="13"/>
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#ec4899" stroke-width="13"
+                      stroke-dasharray="251.3" stroke-dashoffset="12.57" stroke-linecap="round"/>
+                  </svg>
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <span class="text-lg font-bold text-white">95%</span>
+                  </div>
                 </div>
-            </div>
-
-            <!-- Complaints -->
-            <div class="h-52 bg-[#1a1a1a] rounded-xl">
-                <div class="mt-10 ml-10">
-                    <img class="w-[1200px] p-10" src="src/img/image-removebg-preview (3).png" alt="">
-                </div>
+              </div>
             </div>
 
           </div>
+        </div>
 
-          <!-- RIGHT SECTION -->
-          <div class="col-span-3 space-y-6">
-
-            <!-- Student Updates -->
-            <div class="h-[600px] bg-[#1a1a1a] rounded-xl">
-                <div class=""> 
-                    <img class="w-[370px]" src="src/img/Frame 1.png" alt="">
-                </div>
+        <!-- Fees Collection Section -->
+        <div class="bg-[#1a1a1a] rounded-2xl border border-white/5 p-4">
+          <p class="text-sm font-semibold text-white flex items-center gap-1 mb-4">
+            Fees Collection
+            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </p>
+          <div class="flex gap-5 items-center">
+            <!-- Multi-segment donut -->
+            <div class="relative flex-shrink-0" style="width:110px;height:110px;">
+              <canvas id="feesDonut" width="110" height="110"></canvas>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-base font-bold text-white">50%</span>
+              </div>
             </div>
 
-            <!-- Emergency Box -->
-            <div class="h-64 bg-[#1a1a1a] rounded-xl">
+            <!-- 4 stat boxes -->
+            <div class="flex-1 grid grid-cols-2 gap-3">
+              <!-- Expected -->
+              <div class="bg-[#111] rounded-xl border border-white/5 p-3 flex items-center justify-between">
                 <div>
-                    <img class="ml-36" src="src/img/image-removebg-preview (4).png" alt="">
+                  <p class="text-[10px] text-gray-500 mb-0.5">Expected</p>
+                  <p class="text-sm font-bold text-white">₹ 52,00,000</p>
                 </div>
-                <div class="flex justify-center text-center mt-2">
-                    <p>Press only in case of<br> Emergency</p>
+                <div class="w-7 h-7 rounded-lg bg-[#222] flex items-center justify-center flex-shrink-0">
+                  <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 </div>
-                <div class="w-52 h-10 bg-[#ff0808] rounded-lg font-bold flex justify-center items-center mx-auto mt-2">
-                    <button>Emergency</button>
+              </div>
+              <!-- Remaining -->
+              <div class="bg-[#111] rounded-xl border border-white/5 p-3 flex items-center justify-between">
+                <div>
+                  <p class="text-[10px] text-gray-500 mb-0.5">Remaining</p>
+                  <p class="text-sm font-bold text-yellow-400">₹ 15,60,000</p>
                 </div>
+                <div class="w-7 h-7 rounded-lg bg-[#222] flex items-center justify-center flex-shrink-0">
+                  <svg class="w-3.5 h-3.5 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </div>
+              </div>
+              <!-- Collected -->
+              <div class="bg-[#111] rounded-xl border border-white/5 p-3 flex items-center justify-between">
+                <div>
+                  <p class="text-[10px] text-gray-500 mb-0.5">Collected</p>
+                  <p class="text-sm font-bold text-[#00e5cc]">₹ 26,00,000</p>
+                </div>
+                <div class="w-7 h-7 rounded-lg bg-[#222] flex items-center justify-center flex-shrink-0">
+                  <svg class="w-3.5 h-3.5 text-[#00e5cc]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </div>
+              </div>
+              <!-- Overdue -->
+              <div class="bg-[#111] rounded-xl border border-white/5 p-3 flex items-center justify-between">
+                <div>
+                  <p class="text-[10px] text-gray-500 mb-0.5">Overdue</p>
+                  <p class="text-sm font-bold text-pink-400">₹ 10,40,000</p>
+                </div>
+                <div class="w-7 h-7 rounded-lg bg-[#222] flex items-center justify-center flex-shrink-0">
+                  <svg class="w-3.5 h-3.5 text-pink-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Complaints Section -->
+        <div class="bg-[#1a1a1a] rounded-2xl border border-white/5 p-4">
+          <p class="text-sm font-semibold text-white flex items-center gap-1 mb-4">
+            Complaints
+            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </p>
+          <div class="flex gap-5 items-center">
+            <!-- Segmented bar -->
+            <div class="flex-shrink-0 w-28 h-14 flex gap-1 rounded-xl overflow-hidden">
+              <!-- Cyan ~61% -->
+              <div class="h-full rounded-l-xl" style="width:61%;background:#00e5cc;"></div>
+              <!-- Yellow ~39% -->
+              <div class="h-full rounded-r-xl" style="width:39%;background:#facc15;"></div>
             </div>
 
+            <!-- Stats -->
+            <div class="flex gap-6">
+              <div>
+                <p class="text-[10px] text-gray-500 flex items-center gap-1 mb-0.5">
+                  Total Complaints
+                  <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </p>
+                <p class="text-2xl font-bold text-white">158</p>
+              </div>
+              <div>
+                <p class="text-[10px] text-gray-500 flex items-center gap-1 mb-0.5">
+                  Resolved
+                  <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </p>
+                <p class="text-2xl font-bold text-[#00e5cc]">96</p>
+              </div>
+              <div>
+                <p class="text-[10px] text-gray-500 flex items-center gap-1 mb-0.5">
+                  Open
+                  <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </p>
+                <p class="text-2xl font-bold text-yellow-400">62</p>
+              </div>
+            </div>
           </div>
-
         </div>
 
       </main>
 
-    </div>
+      <!-- Right Sidebar -->
+      <aside class="w-56 flex-shrink-0 bg-[#111111] border-l border-white/5 flex flex-col overflow-hidden">
+        <!-- Student Update -->
+        <div class="p-4 flex-1 overflow-y-auto scrollbar-hide">
+          <p class="text-sm font-semibold text-white flex items-center gap-1 mb-3">
+            Student Update
+            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </p>
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-2.5 bg-[#1a1a1a] rounded-xl px-3 py-2.5 cursor-pointer hover:bg-[#222] transition-all">
+              <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=20" class="w-full h-full object-cover" alt=""/></div>
+              <div>
+                <p class="text-xs font-medium text-white">Ramakant Sharma</p>
+                <p class="text-[10px] text-gray-500">⬆ 12:30</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 bg-[#1a1a1a] rounded-xl px-3 py-2.5 cursor-pointer hover:bg-[#222] transition-all">
+              <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=21" class="w-full h-full object-cover" alt=""/></div>
+              <div>
+                <p class="text-xs font-medium text-white">Ramakant Sharma</p>
+                <p class="text-[10px] text-gray-500">⬇ 12:30</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 bg-[#1a1a1a] rounded-xl px-3 py-2.5 cursor-pointer hover:bg-[#222] transition-all">
+              <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=22" class="w-full h-full object-cover" alt=""/></div>
+              <div>
+                <p class="text-xs font-medium text-white">Ramakant Sharma</p>
+                <p class="text-[10px] text-gray-500">⬆ 12:30</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 bg-[#1a1a1a] rounded-xl px-3 py-2.5 cursor-pointer hover:bg-[#222] transition-all">
+              <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=23" class="w-full h-full object-cover" alt=""/></div>
+              <div>
+                <p class="text-xs font-medium text-white">Ramakant Sharma</p>
+                <p class="text-[10px] text-gray-500">⬇ 12:30</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 bg-[#1a1a1a] rounded-xl px-3 py-2.5 cursor-pointer hover:bg-[#222] transition-all">
+              <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=24" class="w-full h-full object-cover" alt=""/></div>
+              <div>
+                <p class="text-xs font-medium text-white">Ramakant Sharma</p>
+                <p class="text-[10px] text-gray-500">⬆ 12:30</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 bg-[#1a1a1a] rounded-xl px-3 py-2.5 cursor-pointer hover:bg-[#222] transition-all">
+              <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0"><img src="https://i.pravatar.cc/32?img=25" class="w-full h-full object-cover" alt=""/></div>
+              <div>
+                <p class="text-xs font-medium text-white">Ramakant Sharma</p>
+                <p class="text-[10px] text-gray-500">⬇ 12:30</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <!-- Emergency Section -->
+        <div class="p-4 border-t border-white/5 flex flex-col items-center gap-3">
+          <!-- Red glowing power button -->
+          <div class="w-16 h-16 rounded-full bg-red-600/20 border-2 border-red-600/40 flex items-center justify-center relative">
+            <div class="absolute inset-0 rounded-full bg-red-600/10"></div>
+            <svg class="w-7 h-7 text-red-500 relative z-10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9"/>
+            </svg>
+          </div>
+          <p class="text-[10px] text-gray-400 text-center leading-relaxed">Press only in Case of<br/>Emergency</p>
+          <button class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-2.5 rounded-xl ">
+            EMERGENCY
+          </button>
+        </div>
+      </aside>
+
+    </div><!-- end content flex row -->
   </div>
-
+</div>
 </body>
 </html>
